@@ -17,8 +17,8 @@ We use [torch](http://torch.ch/) to train the neural network and a VGG based dee
 ## What it means
 Captcha as a system is vulnerable and should be stopped as noted [here](http://www.geek.com/news/ai-beats-captcha-with-90-success-but-google-has-something-new-1575339/). There are other means to stop automated software. This is a demonstration that the current captcha system used by IRCTC is vulnerable and doesnt do its intended purpose of stopping automated booking. Thats one reason why a lot of automated software is puportedly [available](http://timesofindia.indiatimes.com/tech/tech-news/IRCTC-website-is-sitting-duck-to-hackware/articleshow/50412277.cms). I have tried contacting IRCTC to let them know about this. Atleast this will make them stop using captchas which doesnt stop bots and even inconvenice legit users. 
 
-##Req
+##Requirements
 Install [torch](http://torch.ch/) software along with CUDA and cutorch, [csvigo](https://github.com/clementfarabet/lua---csv)
-remove cuda calls if not using CUDA in main.lua
+remove cuda calls if not using CUDA in main.lua and train.lua
 set batchsize, data folder etc in main.lua
 th main.lua
