@@ -1,9 +1,18 @@
 # Reading irctc captchas with 95% accuracy using deep learning
 
-Captcha is a system used on popular websites to stop bots or automatic software to access the site. IRCTC is a popular travel website in india where people book travel tickets on trains. Because of high demand of tickets, booking during peak hours (tatkal) has a captcha image containing letters that humans have to enter to book the ticket. This supposedly stops ticket booking through automated software. 
+[Captcha](https://en.wikipedia.org/wiki/CAPTCHA) is a system used on popular websites to stop bots or automatic software to access the site. IRCTC is a popular travel website in india where people book travel tickets on trains. Because of high demand of tickets, booking during peak hours (tatkal) has a captcha image containing letters that humans have to enter to book the ticket. This supposedly stops ticket booking through automated software. 
 
 ![Example](data/captchaImage.1.png?raw=true "IRCTC captcha")
 
 
-Here we show that the current captcha system used by IRCTC is vulnerable. Especially we see how to use deep learning to read captchas with 95% accuracy. 
+Here we show that the current captcha system used by IRCTC is vulnerable. Especially we see how to use [deep learning](https://en.wikipedia.org/wiki/Deep_learning) to read captchas with 95% accuracy. Machine learning can be seen as trying to find a function given examples of input and output of that function. So if y=f(x), here x can be the captcha image and y can be text to be read from the image. We are trying to fit a function f using machine learning to read text from the image. The great thing about machine learning is that if we provide the pairs of image and text, the ml is generic enough and tries to figure out the underlying function. Here we use deep neural networks as out machine learning algorithm. So the two main steps are to generate the pairs of images and text which is one of the main tasks in machine learning applications
+
+
+## Dataset
+To use deep learning we need sufficient training set. For this use this [url](https://www.irctc.co.in/eticketing/captchaImage) to download sample captcha images and you need to provide the appropriate labels in the format used in example data folder in this repository. I have used around 10000 samples to acheive 95% accuracy. The example data has only 100 samples which is insufficient for training this model. 
+
+## Neural network 
+We use torch to train the neural network and a VGG based deep neural network architecture. We train on a GPU Nvidia 780 Titan. You can check similar set up for CIFAR dataset at [this blog post](http://torch.ch/blog/2015/07/30/cifar.html). The main difference is the criterion, as the output of a image is a sequence of characters which begs us to use RNN. But that is also not necessary here as we use our custom MultiCrossEntropyCriterion and is sufficient to get good enough results. I have committed the code to github repository here. We assume the dataset to be in a folder (named data). The shown image size is 50×170. The network can be changed accordingly to fit any other captcha. 
+
+
 
