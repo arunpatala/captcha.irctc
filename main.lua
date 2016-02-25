@@ -1,8 +1,8 @@
 data = require 'data'
-dir = 'captcha/'
+dir = 'data/'
 X,Y = data.storeXY(dir,50,170,'captchaImage.')
 X,Y = data.loadXY(dir)
-Xt,Yt,Xv,Yv = data.split(X,Y,1000)
+Xt,Yt,Xv,Yv = data.split(X,Y,50)
 models = require 'models'
 net,ct = models.cnnModel()
 net = net:cuda()
