@@ -22,3 +22,6 @@ Install [torch](http://torch.ch/) software along with CUDA and cutorch, [csvigo]
 remove cuda calls if not using CUDA in main.lua and train.lua
 set batchsize, data folder etc in main.lua
 th main.lua
+
+##[Demo](http://ec2-52-87-246-227.compute-1.amazonaws.com/)
+
