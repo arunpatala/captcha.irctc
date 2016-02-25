@@ -29,4 +29,5 @@ th main.lua
 
 
 ###Contact
+If you are in need of help in any interesting projects in machine learning or deep learning, please contact
 arunpatala@gmail.com
