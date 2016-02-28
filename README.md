@@ -7,7 +7,6 @@
 
 ![Example](data/captchaImage.1.png?raw=true "IRCTC captcha")
 
-[Demo taken from around 20000 untrained captchas](http://ec2-52-87-246-227.compute-1.amazonaws.com/demo)
 
 [Demo upload your own file](http://ec2-52-87-246-227.compute-1.amazonaws.com/upload)
 
