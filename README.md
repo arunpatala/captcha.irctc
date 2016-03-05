@@ -10,6 +10,8 @@
 
 Using the residual networks which won the Imagenet challenge and some data augmentation improves the captcha accuracy to 98%. I have added the relevant code. 
 
+#Demo
+
 ![Example](data/captchaImage.1.png?raw=true "IRCTC captcha")
 
 
