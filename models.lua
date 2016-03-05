@@ -61,4 +61,75 @@ function models.cnnModel(k,c)
     return vgg,nn.MultiCrossEntropyCriterion()
 end
 
+function models.resnet(depth)
+    local opt = {
+      cudnn = "fastest",
+      LR = 0.1,
+      nThreads = 2,
+      nClasses = 0,
+      batchSize = 32,
+      testOnly = false,
+      netType = "resnet",
+      resetClassifier = false,
+      shortcutType = "A",
+      gen = "t7",
+      nGPU = 1,
+      depth = depth or 34,
+      weightDecay = 0.0001,
+      data = "",
+      dataset = "irctc",
+      epochNumber = 1,
+      manualSeed = 2,
+      resume = "none",
+      optimState = "none",
+      nEpochs = 1,
+      tenCrop = false,
+      shareGradInput = false,
+      backend = "cudnn",
+      momentum = 0.9,
+      retrain = "none"
+    }
+    local resnet = require 'models/init'
+    local net,ct = resnet.setup(opt, checkpoint)
+    local net = net:cuda()
+    local ct = nn.MultiCrossEntropyCriterion():cuda()
+    return net,ct
+end
+
+
+function models.resnetAug(depth)
+    local opt = {
+      cudnn = "fastest",
+      LR = 0.1,
+      nThreads = 2,
+      nClasses = 0,
+      batchSize = 32,
+      testOnly = false,
+      netType = "resnet",
+      resetClassifier = false,
+      shortcutType = "A",
+      gen = "t7",
+      nGPU = 1,
+      depth = depth or 34,
+      weightDecay = 0.0001,
+      data = "",
+      dataset = "irctcAug",
+      epochNumber = 1,
+      manualSeed = 2,
+      resume = "none",
+      optimState = "none",
+      nEpochs = 1,
+      tenCrop = false,
+      shareGradInput = false,
+      backend = "cudnn",
+      momentum = 0.9,
+      retrain = "none"
+    }
+    local resnet = require 'models/init'
+    local net,ct = resnet.setup(opt, checkpoint)
+    local net = net:cuda()
+    local ct = nn.MultiCrossEntropyCriterion():cuda()
+    return net,ct
+end
+
 return models

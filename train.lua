@@ -3,14 +3,14 @@ require 'nn';
 local train = {}
 
 
-function train.accuracy(Xv,Yv,net,batch)
+function train.accuracy(Xv,Yv,net,batch,prep)
     net:evaluate()
     local batch = batch or 64
     local Nv = Xv:size(1)
     local lloss = 0
     for i =1,Nv,batch do
         local j = math.min(i+batch-1,Nv)
-        local Xb = Xv[{{i,j}}]:cuda()
+        local Xb = (prep and prep(Xv[{{i,j}}]) or Xv[{{i,j}}]):cuda()
         local Yb = Yv[{{i,j}}]:cuda()
         local out = net:forward(Xb) -- N*k*C
         local tmp,YYb = out:max(3)
@@ -20,14 +20,14 @@ function train.accuracy(Xv,Yv,net,batch)
 end
 
 
-function train.accuracyK(Xv,Yv,net,batch)
+function train.accuracyK(Xv,Yv,net,batch,prep)
     net:evaluate()
     local batch = batch or 64
     local Nv = Xv:size(1)
     local lloss = 0
     for i =1,Nv,batch do
         local j = math.min(i+batch-1,Nv)
-        local Xb = Xv[{{i,j}}]:cuda()
+        local Xb = (prep and prep(Xv[{{i,j}}]) or Xv[{{i,j}}]):cuda()
         local Yb = Yv[{{i,j}}]:cuda()
         local out = net:forward(Xb) -- N*k*C
         local tmp,YYb = out:max(3)
@@ -37,7 +37,7 @@ function train.accuracyK(Xv,Yv,net,batch)
 end
 
 
-function train.sgd(net,ct,Xt,Yt,Xv,Yv,K,sgd_config,batch)
+function train.sgd(net,ct,Xt,Yt,Xv,Yv,K,sgd_config,batch,prep)
     local x,dx = net:getParameters()
     require 'optim'
     local batch = batch or 64
@@ -49,10 +49,10 @@ function train.sgd(net,ct,Xt,Yt,Xv,Yv,K,sgd_config,batch)
         net:training()
 
         for i=1,Nt,batch do
-            if(i%100*batch==1) then print(i,Nt) end
+            if(i%(20*batch)==1) then print(i,Nt) end
             dx:zero()
             local j = math.min(i+batch-1,Nt)
-            local Xb = Xt[{{i,j}}]:cuda()
+            local Xb = ( prep and prep(Xt[{{i,j}}]) or Xt[{{i,j}}] ):cuda()
             local Yb = Yt[{{i,j}}]:cuda()
             local out = net:forward(Xb)
             local loss = ct:forward(out,Yb)
@@ -67,10 +67,10 @@ function train.sgd(net,ct,Xt,Yt,Xv,Yv,K,sgd_config,batch)
             lloss = lloss + loss
         end
         print('loss..'..lloss)
-        print('valid .. '.. train.accuracy(Xv,Yv,net,batch))
-        print('train .. '.. train.accuracy(Xt,Yt,net,batch))
-        print('valid .. '.. train.accuracyK(Xv,Yv,net,batch))
-        print('train .. '.. train.accuracyK(Xt,Yt,net,batch))
+        print('valid .. '.. train.accuracy(Xv,Yv,net,batch,prep))
+        --print('train .. '.. train.accuracy(Xt,Yt,net,batch,prep))
+        --print('valid .. '.. train.accuracyK(Xv,Yv,net,batch))
+        --print('train .. '.. train.accuracyK(Xt,Yt,net,batch))
     end
 end
 
