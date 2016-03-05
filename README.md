@@ -8,7 +8,7 @@
 
 #Update
 
-Using the residual networks which won the Imagenet challenge and some data augmentation improves the captcha accuracy to 98%. I have added the relevant code. 
+Using the residual networks (34 layers deep) which won the Imagenet challenge and some data augmentation improves the captcha accuracy to 98%. I have added the relevant code. Run mainr.lua or mainaug.lua.
 
 #Demo
 
