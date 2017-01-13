@@ -1,3 +1,5 @@
+require 'cutorch'
+require 'cunn'
 data = require 'data'
 dir = 'data/'
 X,Y = data.storeXY(dir,50,170,'captchaImage.')

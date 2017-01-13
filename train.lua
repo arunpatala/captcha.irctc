@@ -14,7 +14,7 @@ function train.accuracy(Xv,Yv,net,batch,prep)
         local Yb = Yv[{{i,j}}]:cuda()
         local out = net:forward(Xb) -- N*k*C
         local tmp,YYb = out:max(3)
-        lloss = lloss + YYb:eq(Yb):sum()
+        lloss = lloss + YYb:cuda():eq(Yb):sum()
     end
     return (100*lloss/(5*Nv))
 end
