@@ -6,11 +6,11 @@
 
 [Captcha](https://en.wikipedia.org/wiki/CAPTCHA) is a system used on popular websites to stop bots or automatic software to access the site. [IRCTC](https://www.irctc.co.in/eticketing/loginHome.jsf) is a popular travel website in india where people book travel tickets on trains. Because of high demand of tickets, booking during peak hours (tatkal) has a captcha image containing letters that humans have to enter to book the ticket. This supposedly stops ticket booking through automated software. 
 
-#Update
+# Update
 
 Using the residual networks (34 layers deep) which won the Imagenet challenge and some data augmentation improves the captcha accuracy to 98%. I have added the relevant code. Run mainr.lua or mainaug.lua.
 
-#Demo
+# Demo
 
 ![Example](data/captchaImage.1.png?raw=true "IRCTC captcha")
 
@@ -29,13 +29,13 @@ We use [torch](http://torch.ch/) to train the neural network and a VGG based dee
 ## What it means
 Captcha as a system is vulnerable and should be stopped as noted [here](http://www.geek.com/news/ai-beats-captcha-with-90-success-but-google-has-something-new-1575339/). There are other means to stop automated software. This is a demonstration that the current captcha system used by IRCTC is vulnerable and doesnt do its intended purpose of stopping automated booking. Thats one reason why a lot of automated software is puportedly [available](http://timesofindia.indiatimes.com/tech/tech-news/IRCTC-website-is-sitting-duck-to-hackware/articleshow/50412277.cms). I have tried contacting IRCTC to let them know about this. Atleast this will make them stop using captchas which doesnt stop bots and even inconvenice legit users. 
 
-##Requirements
+## Requirements
 Install [torch](http://torch.ch/) software along with CUDA and cutorch, [csvigo](https://github.com/clementfarabet/lua---csv)
 remove cuda calls if not using CUDA in main.lua and train.lua
 set batchsize, data folder etc in main.lua
 th main.lua
 
 
-###Contact
+### Contact
 If you are in need of help in any interesting projects in machine learning or deep learning, please contact
 arunpatala@gmail.com
